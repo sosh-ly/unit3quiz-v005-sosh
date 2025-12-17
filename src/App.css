@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
 .page {
   display: flex;
   flex-direction: column;
@@ -234,6 +239,18 @@
   color: #b91c1c;
 }
 
+.statement-panel .lede {
+  color: #0f172a;
+}
+
+.statement-panel {
+  order: 2;
+}
+
+.vote-panel {
+  order: 3;
+}
+
 h1 {
   margin: 0.2rem 0 0.35rem;
 }
@@ -272,6 +289,26 @@ h2 {
   background: #f6fff4;
   border: 1px solid #cde9cf;
   box-shadow: 0 16px 45px rgba(34, 197, 94, 0.12);
+}
+
+.theme-support .statement-panel {
+  background: #ffffff;
+  border-color: #b7f0c4;
+  box-shadow: 0 12px 32px rgba(34, 197, 94, 0.16);
+}
+
+.theme-support .statement-panel .lede {
+  color: #0b2b18;
+}
+
+.theme-burn .statement-panel {
+  background: #fff1f1;
+  border-color: #ef4444;
+}
+
+.theme-burn .statement-panel .lede,
+.theme-burn .statement-panel h2 {
+  color: #2c0f0f;
 }
 
 .theme-support .helper {
@@ -325,15 +362,13 @@ h2 {
 }
 
 .theme-burn {
-  background: radial-gradient(circle at 12% 12%, rgba(248, 113, 113, 0.18), transparent 26%),
-    radial-gradient(circle at 82% 4%, rgba(249, 115, 22, 0.2), transparent 26%),
-    #fff6f6;
+  background: linear-gradient(135deg, #2c0f0f, #7f1d1d 45%, #991b1b);
 }
 
 .theme-burn .page__header {
-  background: linear-gradient(135deg, #2c0f0f, #7f1d1d);
+  background: linear-gradient(135deg, #450a0a, #991b1b);
   color: #ffecec;
-  box-shadow: 0 18px 55px rgba(127, 29, 29, 0.4);
+  box-shadow: 0 18px 55px rgba(185, 28, 28, 0.55);
 }
 
 .theme-burn .eyebrow {
@@ -345,52 +380,52 @@ h2 {
 }
 
 .theme-burn .pill {
-  background: rgba(248, 113, 113, 0.16);
+  background: rgba(248, 113, 113, 0.3);
   color: #ffecec;
-  border-color: #fecdd3;
+  border-color: #fca5a5;
 }
 
 .theme-burn .panel {
-  background: #fff6f6;
-  border: 1px solid #fecdd3;
-  box-shadow: 0 16px 45px rgba(239, 68, 68, 0.18);
+  background: #fff1f1;
+  border: 1px solid #fca5a5;
+  box-shadow: 0 16px 45px rgba(185, 28, 28, 0.25);
 }
 
 .theme-burn .helper {
-  color: #7f1d1d;
+  color: #450a0a;
 }
 
 .theme-burn .filter-pill {
-  border-color: #fecaca;
-  background: #fff1f1;
+  border-color: #fca5a5;
+  background: #ffe5e5;
 }
 
 .theme-burn .filter-pill:hover {
-  border-color: #dc2626;
-  background: #ffe0e0;
+  border-color: #ef4444;
+  background: #ffdede;
 }
 
 .theme-burn .summary {
-  background: #fff1f1;
-  border-color: #fecdd3;
+  background: #ffe5e5;
+  border-color: #fca5a5;
 }
 
 .theme-burn .legend-item {
-  border-color: #fecdd3;
-  background: #fff1f1;
+  border-color: #fca5a5;
+  background: #ffe5e5;
 }
 
 .theme-burn .vote-meter {
-  border-color: #fca5a5;
-  background: #fff1f1;
+  border-color: #ef4444;
+  background: #ffe5e5;
 }
 
 .theme-burn .vote-meter__support {
-  background: linear-gradient(90deg, #22c55e, #a3e635);
+  background: linear-gradient(90deg, #22c55e, #65a30d);
 }
 
 .theme-burn .vote-meter__burn {
-  background: linear-gradient(90deg, #dc2626, #ea580c);
+  background: linear-gradient(90deg, #b91c1c, #dc2626);
 }
 
 .theme-burn .vote-btn--burn {

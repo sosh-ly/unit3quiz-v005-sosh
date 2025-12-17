@@ -70,7 +70,9 @@ function App() {
   const [voteError, setVoteError] = useState('')
   const [hasVotedBurn, setHasVotedBurn] = useState(false)
   const [voteMood, setVoteMood] = useState('neutral')
+  const [hasVotedSupport, setHasVotedSupport] = useState(false)
   const [showBurnLock, setShowBurnLock] = useState(false)
+  const [showSupportLock, setShowSupportLock] = useState(false)
 
   useEffect(() => {
     const loadData = async () => {
@@ -96,8 +98,10 @@ function App() {
 
   useEffect(() => {
     const storedBurnFlag = localStorage.getItem('sosh-voted-burn')
+    const storedSupportFlag = localStorage.getItem('sosh-voted-support')
     const storedMood = localStorage.getItem('sosh-vote-mood')
     if (storedBurnFlag === 'true') setHasVotedBurn(true)
+    if (storedSupportFlag === 'true') setHasVotedSupport(true)
     if (storedMood === 'support' || storedMood === 'burn') setVoteMood(storedMood)
 
     const unsubscribe = onSnapshot(
@@ -118,6 +122,14 @@ function App() {
 
     return () => unsubscribe()
   }, [])
+
+  useEffect(() => {
+    const body = document.body
+    body.classList.remove('theme-support', 'theme-burn')
+    if (voteMood === 'support') body.classList.add('theme-support')
+    if (voteMood === 'burn') body.classList.add('theme-burn')
+    return () => body.classList.remove('theme-support', 'theme-burn')
+  }, [voteMood])
 
   const availableDrugs = useMemo(
     () =>
@@ -191,6 +203,11 @@ function App() {
   }
 
   const castVote = async (type) => {
+    if (type === 'burn' && hasVotedSupport) {
+      setShowSupportLock(true)
+      return
+    }
+
     if (type === 'burn' && hasVotedBurn) {
       setVoteError('You already voted against; you can still support.')
       return
@@ -220,6 +237,10 @@ function App() {
       if (type === 'burn') {
         setHasVotedBurn(true)
         localStorage.setItem('sosh-voted-burn', 'true')
+      }
+      if (type === 'support') {
+        setHasVotedSupport(true)
+        localStorage.setItem('sosh-voted-support', 'true')
       }
 
       setVoteMood(type)
@@ -254,6 +275,22 @@ function App() {
         </>
       )}
       {voteMood === 'burn' && <div className="fx fx--flames" aria-hidden />}
+      {showSupportLock && (
+        <div className="modal-backdrop" role="dialog" aria-modal="true">
+          <div className="modal">
+            <p className="modal__title">
+              Hey there... What do you think you're doing? You made your choice already.
+            </p>
+            <button
+              type="button"
+              className="modal__dismiss"
+              onClick={() => setShowSupportLock(false)}
+            >
+              Sosh Forever
+            </button>
+          </div>
+        </div>
+      )}
       {showBurnLock && (
         <div className="modal-backdrop" role="dialog" aria-modal="true">
           <div className="modal">
@@ -363,12 +400,27 @@ function App() {
         )}
       </section>
 
+      <section className="panel statement-panel">
+        <div className="panel__header">
+          <h2>Sosh's Statement of Intent</h2>
+        </div>
+        <p className="lede">
+          I, Sosh, am running for president in 2044 when it's legal. Do you see this
+          data? This is horrible, and I will fix it. With me as president, we will get
+          these rookie numbers up! Did you know that gun violence is the leading cause
+          of death for american youths? Well once I'm in office, drug overdoeses will
+          be the number one cause of death, not just for youths, but for everyone.
+          America has a school shooting problem, but kids can't shoot up schools if
+          they overdose on fentanyl first! Support Sosh for Substance Abuse States!
+        </p>
+      </section>
+
       <section className="panel vote-panel">
         <div className="panel__header">
           <div>
             <h2>Voice your stance</h2>
             <p className="helper">
-              Cast a vote to support sosh or be against me and burn. Totals update
+              Cast a vote to support Sosh or be against their policies and burn! Totals update
               live.
             </p>
           </div>
@@ -422,9 +474,7 @@ function App() {
         </div>
       </section>
 
-      <footer className="page__footer">
-        I, Sosh, am running for president in 2044 when it's legal. Do you see this data? This is horrible, and I will fix it. With me as president, we will get these rookie numbers up! Did you know that gun violence is the leading cause of death for american youths? Well once I'm in office, drug overdoeses will be the number one cause of death, not just for youths, but for everyone. America has a school shooting problem, but kids can't shoot up schools if they overdose on fentanyl first! Support Sosh for Substance Abuse States!
-      </footer>
+      <footer className="page__footer" />
     </div>
   )
 }
