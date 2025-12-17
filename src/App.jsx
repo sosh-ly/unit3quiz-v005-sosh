@@ -68,6 +68,9 @@ function App() {
   const [voteCounts, setVoteCounts] = useState({ support: 0, burn: 0 })
   const [voteLoading, setVoteLoading] = useState(false)
   const [voteError, setVoteError] = useState('')
+  const [hasVotedBurn, setHasVotedBurn] = useState(false)
+  const [voteMood, setVoteMood] = useState('neutral')
+  const [showBurnLock, setShowBurnLock] = useState(false)
 
   useEffect(() => {
     const loadData = async () => {
@@ -92,6 +95,11 @@ function App() {
   }, [])
 
   useEffect(() => {
+    const storedBurnFlag = localStorage.getItem('sosh-voted-burn')
+    const storedMood = localStorage.getItem('sosh-vote-mood')
+    if (storedBurnFlag === 'true') setHasVotedBurn(true)
+    if (storedMood === 'support' || storedMood === 'burn') setVoteMood(storedMood)
+
     const unsubscribe = onSnapshot(
       voteDocRef,
       (snapshot) => {
@@ -183,6 +191,17 @@ function App() {
   }
 
   const castVote = async (type) => {
+    if (type === 'burn' && hasVotedBurn) {
+      setVoteError('You already voted against; you can still support.')
+      return
+    }
+
+    if (type === 'support' && hasVotedBurn) {
+      // They already burned; keep the burn vibe and show a gentle reminder.
+      setShowBurnLock(true)
+      return
+    }
+
     setVoteLoading(true)
     setVoteError('')
     try {
@@ -197,6 +216,14 @@ function App() {
         }
         transaction.set(voteDocRef, next)
       })
+
+      if (type === 'burn') {
+        setHasVotedBurn(true)
+        localStorage.setItem('sosh-voted-burn', 'true')
+      }
+
+      setVoteMood(type)
+      localStorage.setItem('sosh-vote-mood', type)
     } catch (err) {
       setVoteError(err.message || 'Unable to cast vote')
     } finally {
@@ -211,7 +238,38 @@ function App() {
   const burnPct = 100 - supportPct
 
   return (
-    <div className="page">
+    <div
+      className={`page ${
+        voteMood === 'support'
+          ? 'theme-support'
+          : voteMood === 'burn'
+            ? 'theme-burn'
+            : ''
+      }`}
+    >
+      {voteMood === 'support' && (
+        <>
+          <div className="fx fx--confetti" aria-hidden />
+          <div className="fx fx--sparkles" aria-hidden />
+        </>
+      )}
+      {voteMood === 'burn' && <div className="fx fx--flames" aria-hidden />}
+      {showBurnLock && (
+        <div className="modal-backdrop" role="dialog" aria-modal="true">
+          <div className="modal">
+            <p className="modal__title">
+              I appreciate the change of heart, but you've made your choice.
+            </p>
+            <button
+              type="button"
+              className="modal__dismiss"
+              onClick={() => setShowBurnLock(false)}
+            >
+              burn
+            </button>
+          </div>
+        </div>
+      )}
       <header className="page__header">
         <div>
           <p className="eyebrow">Provisional overdose deaths</p>
@@ -329,7 +387,12 @@ function App() {
           <button
             className="vote-btn vote-btn--burn"
             onClick={() => castVote('burn')}
-            disabled={voteLoading}
+            disabled={voteLoading || hasVotedBurn}
+            title={
+              hasVotedBurn
+                ? 'You already voted against; you can still support.'
+                : undefined
+            }
           >
             Be against me and burn
           </button>

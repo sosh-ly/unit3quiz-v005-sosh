@@ -5,6 +5,9 @@
   padding: 1.5rem 1.25rem 2.5rem;
   max-width: 1100px;
   margin: 0 auto;
+  position: relative;
+  isolation: isolate;
+  transition: background 220ms ease, color 220ms ease;
 }
 
 .page__header {
@@ -237,4 +240,279 @@ h1 {
 
 h2 {
   margin: 0;
+}
+
+.theme-support {
+  background: radial-gradient(circle at 15% 10%, rgba(34, 197, 94, 0.14), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(45, 212, 191, 0.12), transparent 26%),
+    #f5fff7;
+}
+
+.theme-support .page__header {
+  background: linear-gradient(135deg, #0f3b1f, #0f7f3d);
+  color: #e9fdf1;
+  box-shadow: 0 16px 50px rgba(15, 127, 61, 0.35);
+}
+
+.theme-support .eyebrow {
+  color: #c9f3d8;
+}
+
+.theme-support .lede {
+  color: #dffbe9;
+}
+
+.theme-support .pill {
+  background: rgba(45, 212, 191, 0.16);
+  color: #e9fdf1;
+  border-color: rgba(45, 212, 191, 0.35);
+}
+
+.theme-support .panel {
+  background: #f6fff4;
+  border: 1px solid #cde9cf;
+  box-shadow: 0 16px 45px rgba(34, 197, 94, 0.12);
+}
+
+.theme-support .helper {
+  color: #0f3d24;
+}
+
+.theme-support .filter-pill {
+  border-color: #b7f0c4;
+  background: #edfff3;
+}
+
+.theme-support .filter-pill:hover {
+  border-color: #16a34a;
+  background: #d9fbe5;
+}
+
+.theme-support .summary {
+  background: #f0fff5;
+  border-color: #cde9cf;
+}
+
+.theme-support .legend-item {
+  border-color: #cde9cf;
+  background: #edfff3;
+}
+
+.theme-support .vote-meter {
+  border-color: #9fe3b1;
+  background: #e6ffee;
+}
+
+.theme-support .vote-meter__support {
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+.theme-support .vote-meter__burn {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+}
+
+.theme-support .vote-btn--support {
+  background: linear-gradient(135deg, #16a34a, #22c55e, #34d399);
+  box-shadow: 0 10px 26px rgba(52, 211, 153, 0.45);
+}
+
+.theme-support .vote-btn--burn {
+  box-shadow: 0 10px 26px rgba(245, 158, 11, 0.32);
+}
+
+.theme-support .vote-stats {
+  color: #0f3d24;
+}
+
+.theme-burn {
+  background: radial-gradient(circle at 12% 12%, rgba(248, 113, 113, 0.18), transparent 26%),
+    radial-gradient(circle at 82% 4%, rgba(249, 115, 22, 0.2), transparent 26%),
+    #fff6f6;
+}
+
+.theme-burn .page__header {
+  background: linear-gradient(135deg, #2c0f0f, #7f1d1d);
+  color: #ffecec;
+  box-shadow: 0 18px 55px rgba(127, 29, 29, 0.4);
+}
+
+.theme-burn .eyebrow {
+  color: #fecaca;
+}
+
+.theme-burn .lede {
+  color: #ffe5e5;
+}
+
+.theme-burn .pill {
+  background: rgba(248, 113, 113, 0.16);
+  color: #ffecec;
+  border-color: #fecdd3;
+}
+
+.theme-burn .panel {
+  background: #fff6f6;
+  border: 1px solid #fecdd3;
+  box-shadow: 0 16px 45px rgba(239, 68, 68, 0.18);
+}
+
+.theme-burn .helper {
+  color: #7f1d1d;
+}
+
+.theme-burn .filter-pill {
+  border-color: #fecaca;
+  background: #fff1f1;
+}
+
+.theme-burn .filter-pill:hover {
+  border-color: #dc2626;
+  background: #ffe0e0;
+}
+
+.theme-burn .summary {
+  background: #fff1f1;
+  border-color: #fecdd3;
+}
+
+.theme-burn .legend-item {
+  border-color: #fecdd3;
+  background: #fff1f1;
+}
+
+.theme-burn .vote-meter {
+  border-color: #fca5a5;
+  background: #fff1f1;
+}
+
+.theme-burn .vote-meter__support {
+  background: linear-gradient(90deg, #22c55e, #a3e635);
+}
+
+.theme-burn .vote-meter__burn {
+  background: linear-gradient(90deg, #dc2626, #ea580c);
+}
+
+.theme-burn .vote-btn--burn {
+  background: linear-gradient(135deg, #b91c1c, #ef4444, #f97316);
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.42);
+}
+
+.theme-burn .vote-btn--support {
+  box-shadow: 0 10px 24px rgba(34, 197, 94, 0.25);
+}
+
+.theme-burn .vote-stats {
+  color: #7f1d1d;
+}
+
+.fx {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fx--confetti {
+  background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.7) 0 7px, transparent 8px),
+    radial-gradient(circle at 30% -2%, rgba(34, 197, 94, 0.7) 0 9px, transparent 10px),
+    radial-gradient(circle at 70% 8%, rgba(59, 130, 246, 0.7) 0 9px, transparent 10px),
+    radial-gradient(circle at 50% 25%, rgba(244, 114, 182, 0.7) 0 10px, transparent 11px),
+    radial-gradient(circle at 90% 2%, rgba(251, 191, 36, 0.7) 0 10px, transparent 11px);
+  background-size: 140% 140%;
+  animation: confetti-fall 16s linear infinite;
+  opacity: 0.7;
+  mix-blend-mode: screen;
+}
+
+.fx--sparkles {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(52, 211, 153, 0.7) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(94, 234, 212, 0.7) 0 3px, transparent 4px);
+  background-size: 38% 38%, 44% 44%, 50% 50%;
+  background-position: 12% 22%, 68% 44%, 38% 80%;
+  animation: sparkle-pulse 3.4s ease-in-out infinite;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+
+.fx--flames {
+  background-image: radial-gradient(circle at 20% 92%, rgba(248, 113, 113, 0.4) 0 120px, transparent 130px),
+    radial-gradient(circle at 60% 98%, rgba(251, 146, 60, 0.48) 0 150px, transparent 170px),
+    radial-gradient(circle at 90% 90%, rgba(220, 38, 38, 0.42) 0 130px, transparent 150px);
+  background-size: cover;
+  animation: flames-rise 5s ease-in-out infinite alternate;
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  filter: blur(0.4px);
+}
+
+@keyframes confetti-fall {
+  0% {
+    background-position: 0% -20%, 10% -30%, 50% -10%, 90% -40%, 120% -15%;
+  }
+  100% {
+    background-position: 0% 120%, 10% 130%, 50% 110%, 90% 140%, 120% 115%;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  background: #fff;
+  color: #0f172a;
+  padding: 1.25rem 1.4rem;
+  border-radius: 14px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.15);
+  max-width: 420px;
+  width: min(92vw, 440px);
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.modal__title {
+  margin: 0 0 0.85rem;
+  font-weight: 700;
+}
+
+.modal__dismiss {
+  border: none;
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(239, 68, 68, 0.35);
+}
+
+@keyframes sparkle-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes flames-rise {
+  0% {
+    transform: translateY(12px) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-12px) scale(1.05);
+    opacity: 0.75;
+  }
 }
